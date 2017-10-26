@@ -4,8 +4,7 @@ $(function() {
   var win = 4;
   var current_player = 1;
   // Red is +1, Yellow is -1
-  var board = get_empty_board(size); //[[], [], [], [], []];
-  // var board = [[1], [-1], [1, -1], [], []];
+  var board = get_empty_board(size); 
 
   // Listen on button clicks
   $('#flip_left').click(flip_left);
@@ -78,7 +77,7 @@ $(function() {
   // Listen on column clicks (if neccessary)
 
 
-
+// MOVES ////////////////////////////////////////////////////////
   // Add function: Adds play to column if available
   function plus(col, play) {
     console.log("Plus: " + col + ":" + play);
@@ -200,20 +199,29 @@ $(function() {
     y_wins = row_win['y'] + col_win['y'] + diag_up_win['y'] + diag_dwn_win['y'];
     if (r_wins > y_wins) {
       alert('Red wins!');
-      // reset();    
+      reset();    
     } else if  (r_wins < y_wins) {
       alert('Yellow wins!');
-      // reset();    
+      reset();    
     }
   }
 
-// BOARD UTILS ////////////////////////////////////////////////////////
+  // function declare_winner(winner) {
+  //   winner_declaration = winner + " wins!"
+  //   if (confirm("Play again?") == true) {
+  //     reset();
+  //   } else {
+  //     // TODO: DO SOMETHING
+  //   }
+  // }
+
+// GAME UTILS ////////////////////////////////////////////////////////
 
   // Group end of turn functions together
   function end_turn() {
+    draw_board();
     swap_player();
     // TODO: CHECK FOR WIN
-    draw_board();
     check_for_win(); 
   }
 
@@ -240,15 +248,28 @@ $(function() {
     }
   }
 
+  //Draw player square
+  function draw_player_square() {
+    $("#player_square").removeClass();
+    if (current_player === 1){
+      $("#player_square").css('background-color', 'red');
+    } else {
+      $("#player_square").css('background-color', 'yellow');
+    }
+  }
+
   // Swap player
   function swap_player() {
     current_player *= -1;
-    $("#player_square").removeClass();
-    if (current_player === 1){
-      $("#player_square").css('background-color', 'red');;
-    } else {
-      $("#player_square").css('background-color', 'yellow');;
-    }
+    draw_player_square();
+  }
+
+  // Reset game
+  function reset() {
+    current_player = 1;
+    board = get_empty_board(size); 
+    draw_board();
+    draw_player_square();
   }
 
   // Draw win (TODO)
