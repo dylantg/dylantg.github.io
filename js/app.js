@@ -229,15 +229,15 @@ $(function() {
     y_win = 0;
     for (i = 0; i <= size - win; i++) {
       for (j = win - 1; j < size; j++) {
-        // console.log("Diag Down checking: ", i, j);
+        console.log("Diag Down checking: ", i, j);
         sum = 0;
         for (k = 0; k < win; k++) {
-          if (i + k <= size - 1 && j + k <= size - 1) {
-            space = board[i + k][j - k];
-            if (space != null) {
-              sum += space;
-            }            
-          }
+          space = board[i + k][j - k];
+          if (space != null) {
+            sum += space;
+          } else {
+            break;
+          }            
         }
         if (sum === win) {
           r_win++;
