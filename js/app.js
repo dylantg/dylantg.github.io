@@ -145,14 +145,18 @@ $(function() {
     r_win = 0;
     y_win = 0;
     for (i = 0; i < size; i++) {
+      // console.log("Checking column: ", i);
       col_size = board[i].length;
+      // Only continues if column if large enough to have a win
       if (col_size >= win){
-        for (j = 0; j < col_size - win + 1; j++) {
+        for (j = 0; j <= col_size - win; j++) {
           sum = 0;
           for (k = 0; k < win; k++) {
             space = board[i][j + k];
             if (space != null) {
               sum += space;
+            } else {
+              break; // Short-circuits check if empty space
             }
           }
           if (sum === win) {
@@ -169,12 +173,67 @@ $(function() {
   function check_rows() {
     r_win = 0;
     y_win = 0;
-    for (j = 0; j < size; j++) {
-      for (i = 0; i < size; i++) {
+    // Checks columns to the farthest right a win can start
+    for (i = 0; i <= size - win; i++) {
+      // Checks only to the height of the column, since it can't start with a played space
+      for (j = 0; j < board[i].length; j++) {
+        console.log("Rows checking: ", i, j);
         sum = 0;
         for (k = 0; k < win; k++) {
-          if (i + k <= size -1) {
+          if (i + k <= size - 1) {
             space = board[i + k][j];
+            if (space != null) {
+              sum += space;
+            } else {
+              break; // Short-circuits check if empty space
+            }
+          }
+        }
+        if (sum === win) {
+          r_win++;
+        } else if (sum === (-1 * win)) {
+          y_win++;
+        }
+      }
+    }
+    return  {'r':r_win, 'y':y_win};
+  }
+
+  function check_diagonal_up() {
+    r_win = 0;
+    y_win = 0;
+    for (i = 0; i <= size - win; i++) {
+      for (j = 0; j <= size - win; j++) {
+        // console.log("Diag Up checking: ", i, j);
+        sum = 0;
+        for (k = 0; k < win; k++) {
+          space = board[i + k][j + k];
+          if (space != null) {
+            sum += space;
+          } else {
+            break; // Short-circuits check if empty space
+          }            
+        }
+        if (sum === win) {
+          r_win++;
+        } else if (sum === (-1 * win)) {
+          y_win++;
+        }
+      }
+    }
+    return  {'r':r_win, 'y':y_win};
+  }
+
+  function check_diagonal_down() {
+    r_win = 0;
+    y_win = 0;
+    for (i = 0; i <= size - win; i++) {
+      for (j = win - 1; j < size; j++) {
+        // console.log("Diag Down checking: ", i, j);
+        sum = 0;
+        for (k = 0; k < win; k++) {
+          if (i + k <= size - 1 && j + k <= size - 1) {
+            space = board[i + k][j - k];
             if (space != null) {
               sum += space;
             }            
@@ -193,8 +252,8 @@ $(function() {
   function check_for_win() {
     row_win = check_rows();
     col_win = check_columns();
-    diag_up_win = {'r': 0, 'y': 0}; // check_diagonal_up(); //TODO
-    diag_dwn_win = {'r': 0, 'y': 0}; // check_diagonal_down(); //TODO
+    diag_up_win = check_diagonal_up(); //TODO
+    diag_dwn_win = check_diagonal_down(); //TODO
     r_wins = row_win['r'] + col_win['r'] + diag_up_win['r'] + diag_dwn_win['r'];
     y_wins = row_win['y'] + col_win['y'] + diag_up_win['y'] + diag_dwn_win['y'];
     if (r_wins > y_wins) {
