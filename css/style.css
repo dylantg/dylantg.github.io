@@ -65,7 +65,7 @@ footer {
 }
 
 .board_buttons {
-  height: 120px;
+  height: 102px;
   width: 452px;
   float: left;
   padding: 0px; 
@@ -87,7 +87,7 @@ footer {
 }
 
 #player_square {
-  width: 50px;
+  width: 100px;
   height: 50px;
   border: 1px solid black;
   background-color: red;
