@@ -116,7 +116,7 @@ footer {
 .win_square {
   border: 3px solid blue;
 }
-
+/*
 @media (min-width: 768px) {
   .container {
     width: 750px;
@@ -132,3 +132,4 @@ footer {
     width: 1170px;
   }
 }
+*/
