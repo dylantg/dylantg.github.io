@@ -287,17 +287,15 @@ $(function() {
     r_wins = row_win['r'] + col_win['r'] + diag_up_win['r'] + diag_dwn_win['r'];
     y_wins = row_win['y'] + col_win['y'] + diag_up_win['y'] + diag_dwn_win['y'];
     if (r_wins > 0 || y_wins > 0) {
+      $("#flip_buttons").css('display', 'none');
+      $("#board_buttons").css('display', 'none');
+      $("#player").css('display', 'none');
+
       if (r_wins > y_wins) {
-        $(".flip_buttons").css('display', 'none');
-        $(".board_buttons").css('display', 'none');
         return 1;
       } else if  (r_wins < y_wins) {
-        $(".flip_buttons").css('display', 'none');
-        $(".board_buttons").css('display', 'none');     
         return -1;
       } else {
-        $(".flip_buttons").css('display', 'none');
-        $(".board_buttons").css('display', 'none');     
         return 0;
       }
     }
@@ -307,11 +305,11 @@ $(function() {
   function alert_on_win(winner) {
     if (winner != null) {
       if (winner === 1) {
-        alert('Red wins!');
+        $("#winner").text('Red wins!');        
       } else if (winner === -1) {
-        alert('Yellow wins!');
+        $("#winner").text('Yellow wins!');
       } else {
-        alert('Tie!')
+        $("#winner").text('Tie!');
       }
     }
   }
@@ -321,9 +319,6 @@ $(function() {
     $(space).addClass('win_square');            
   }
 
-  function delayAlert(message) {
-    alert(message);
-  }
   // function declare_winner(winner) {
   //   winner_declaration = winner + " wins!"
   //   if (confirm("Play again?") == true) {
@@ -342,7 +337,6 @@ $(function() {
     // TODO: CHECK FOR WIN
     var winner = check_for_win(); 
     if (winner != null) {
-      draw_board();
       alert_on_win(winner);
     }
   }
@@ -390,8 +384,10 @@ $(function() {
   // Reset game
   function reset() {
     current_player = 1;
-    $(".flip_buttons").css('display', 'initial');
-    $(".board_buttons").css('display', 'initial');
+    $("#winner").text('');
+    $("#flip_buttons").css('display', 'initial');
+    $("#board_buttons").css('display', 'initial');
+    $("#player").css('display', 'initial');
     board = get_empty_board(size); 
     draw_board();
     draw_player_square();
