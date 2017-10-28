@@ -163,9 +163,9 @@ $(function() {
           }
           if (Math.abs(sum) === win) {
             for (k = 0; k < win; k++) {
-              space = "#sq_" + i + "_" +  (j + k);
-              // $(space).css('border', '3px solid blue');
-              $(space).addClass('win_square');
+              // space = "#sq_" + i + "_" +  (j + k);
+              // $(space).addClass('win_square');
+              addWinSquare(i, (j + k));
             }
             if (sum === win) {
               r_win++;
@@ -200,9 +200,9 @@ $(function() {
         }
         if (Math.abs(sum) === win) {
           for (k = 0; k < win; k++) {
-            space = "#sq_" + (i + k) + "_" +  j;
-            // $(space).css('border', '3px solid blue');
-            $(space).addClass('win_square');
+            // space = "#sq_" + (i + k) + "_" +  j;
+            // $(space).addClass('win_square');
+            addWinSquare((i + k), j);            
           }
           if (sum === win) {
             r_win++;
@@ -232,9 +232,9 @@ $(function() {
         }
         if (Math.abs(sum) === win) {
           for (k = 0; k < win; k++) {
-            space = "#sq_" + (i + k) + "_" +  (j + k);
-            // $(space).css('border', '3px solid blue');
-            $(space).addClass('win_square');            
+            // space = "#sq_" + (i + k) + "_" +  (j + k);
+            // $(space).addClass('win_square');
+            addWinSquare((i + k), (j + k));
           }
           if (sum === win) {
             r_win++;
@@ -264,9 +264,9 @@ $(function() {
         }
         if (Math.abs(sum) === win) {
           for (k = 0; k < win; k++) {
-            space = "#sq_" + (i + k) + "_" +  (j - k);
-            // $(space).css('border', '3px solid blue');
-            $(space).addClass('win_square');            
+            // space = "#sq_" + (i + k) + "_" +  (j - k);
+            // $(space).addClass('win_square');
+            addWinSquare((i + k), (j - k));
           }
           if (sum === win) {
             r_win++;
@@ -297,6 +297,11 @@ $(function() {
       alert('Yellow wins!');
       // reset();    
     }
+  }
+
+  function addWinSquare(i, j) {
+    space = "#sq_" + i + "_" +  j;
+    $(space).addClass('win_square');            
   }
 
   // function declare_winner(winner) {
