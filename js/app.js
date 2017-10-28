@@ -89,7 +89,7 @@ $(function() {
     }
   }
 
-  // Minus function
+  // Minus function: Removes bottom piece from column
   function minus(row) {
     console.log("Minus: " + row);
     if (board[row].length > 0) {
@@ -99,7 +99,7 @@ $(function() {
   }
 
 // FLIPS ////////////////////////////////////////////////////////
-  // Flip left
+  // Flips the board left
   function flip_left() {
     var temp = get_empty_board(size);
     // For every row
@@ -116,7 +116,7 @@ $(function() {
     end_turn();
   }
 
-  // Flip right
+  // Flips the board right
   function flip_right() {
     var temp = get_empty_board(size);
     // For every row
@@ -147,7 +147,6 @@ $(function() {
     r_win = 0;
     y_win = 0;
     for (i = 0; i < size; i++) {
-      // console.log("Checking column: ", i);
       col_size = board[i].length;
       // Only continues if column if large enough to have a win
       if (col_size >= win){
@@ -163,8 +162,6 @@ $(function() {
           }
           if (Math.abs(sum) === win) {
             for (k = 0; k < win; k++) {
-              // space = "#sq_" + i + "_" +  (j + k);
-              // $(space).addClass('win_square');
               addWinSquare(i, (j + k));
             }
             if (sum === win) {
@@ -186,7 +183,6 @@ $(function() {
     for (i = 0; i <= size - win; i++) {
       // Checks only to the height of the column, since it can't start with a played space
       for (j = 0; j < board[i].length; j++) {
-        console.log("Rows checking: ", i, j);
         sum = 0;
         for (k = 0; k < win; k++) {
           if (i + k <= size - 1) {
@@ -200,8 +196,6 @@ $(function() {
         }
         if (Math.abs(sum) === win) {
           for (k = 0; k < win; k++) {
-            // space = "#sq_" + (i + k) + "_" +  j;
-            // $(space).addClass('win_square');
             addWinSquare((i + k), j);            
           }
           if (sum === win) {
@@ -220,7 +214,6 @@ $(function() {
     y_win = 0;
     for (i = 0; i <= size - win; i++) {
       for (j = 0; j <= size - win; j++) {
-        // console.log("Diag Up checking: ", i, j);
         sum = 0;
         for (k = 0; k < win; k++) {
           space = board[i + k][j + k];
@@ -232,8 +225,6 @@ $(function() {
         }
         if (Math.abs(sum) === win) {
           for (k = 0; k < win; k++) {
-            // space = "#sq_" + (i + k) + "_" +  (j + k);
-            // $(space).addClass('win_square');
             addWinSquare((i + k), (j + k));
           }
           if (sum === win) {
@@ -264,8 +255,6 @@ $(function() {
         }
         if (Math.abs(sum) === win) {
           for (k = 0; k < win; k++) {
-            // space = "#sq_" + (i + k) + "_" +  (j - k);
-            // $(space).addClass('win_square');
             addWinSquare((i + k), (j - k));
           }
           if (sum === win) {
@@ -287,9 +276,6 @@ $(function() {
     r_wins = row_win['r'] + col_win['r'] + diag_up_win['r'] + diag_dwn_win['r'];
     y_wins = row_win['y'] + col_win['y'] + diag_up_win['y'] + diag_dwn_win['y'];
     if (r_wins > 0 || y_wins > 0) {
-      $("#flip_buttons").css('display', 'none');
-      $("#board_buttons").css('display', 'none');
-      $("#player").css('display', 'none');
 
       if (r_wins > y_wins) {
         return 1;
@@ -302,8 +288,12 @@ $(function() {
     return null;
   }
 
-  function alert_on_win(winner) {
+  function declare_winner(winner) {
     if (winner != null) {
+      $("#flip_buttons").css('display', 'none');
+      $("#board_buttons").css('display', 'none');
+      $("#player").css('display', 'none');
+
       if (winner === 1) {
         $("#winner").text('Red wins!');        
       } else if (winner === -1) {
@@ -319,26 +309,16 @@ $(function() {
     $(space).addClass('win_square');            
   }
 
-  // function declare_winner(winner) {
-  //   winner_declaration = winner + " wins!"
-  //   if (confirm("Play again?") == true) {
-  //     reset();
-  //   } else {
-  //     // TODO: DO SOMETHING
-  //   }
-  // }
-
 // GAME UTILS ////////////////////////////////////////////////////////
 
   // Group end of turn functions together
   function end_turn() {
-    draw_board();
     swap_player();
-    // TODO: CHECK FOR WIN
     var winner = check_for_win(); 
     if (winner != null) {
-      alert_on_win(winner);
+      declare_winner(winner);
     }
+    draw_board();
   }
 
   // Draw board
@@ -349,11 +329,8 @@ $(function() {
         if (j < board[i].length) {
           value = board[i][j];
           if (value === 1) {
-            // $(space).attr('class', 'square red');
-            // $(space).addClass('red');
             $(space).css('background-color', 'red');
           } else if (value === -1) {
-            // $(space).attr('class', 'square yellow');
             $(space).css('background-color', 'yellow');
           }          
         } else {
@@ -367,7 +344,6 @@ $(function() {
 
   //Draw player square
   function draw_player_square() {
-    $("#player_square").removeClass();
     if (current_player === 1){
       $("#player_square").css('background-color', 'red');
     } else {
