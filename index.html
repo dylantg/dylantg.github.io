@@ -12,8 +12,8 @@
       </header>
 
       <aside>
-        <div>Player:<div id="player_square"></div></div>
-        <div class="flip_buttons">
+        <div id="player">Player:<div id="player_square"></div></div>
+        <div id="flip_buttons">
   <!--         <div class="button" id="plus">Plus</div>
           <div class="button" id="minus">Minus</div> -->
           <div class="button" id="flip_left">Flip Left</div>
@@ -24,6 +24,7 @@
       </aside>
 
       <article>
+        <div id="winner"></div>
         <div class="board_with_buttons">
           <div class="board">
             <!-- COLUMN FIRST THEN ROW -->
@@ -87,7 +88,7 @@
               <div class="square" id="sq_5_0">5_0</div>          
             </div>
           </div>
-          <div class="board_buttons">
+          <div id="board_buttons">
               <div class="row">
                 <!-- PLUS --> 
                 <div class="board_button" id="plus_0">+</div>  
