@@ -282,25 +282,36 @@ $(function() {
   function check_for_win() {
     row_win = check_rows();
     col_win = check_columns();
-    diag_up_win = check_diagonal_up(); //TODO
-    diag_dwn_win = check_diagonal_down(); //TODO
+    diag_up_win = check_diagonal_up();
+    diag_dwn_win = check_diagonal_down();
     r_wins = row_win['r'] + col_win['r'] + diag_up_win['r'] + diag_dwn_win['r'];
     y_wins = row_win['y'] + col_win['y'] + diag_up_win['y'] + diag_dwn_win['y'];
     if (r_wins > 0 || y_wins > 0) {
       if (r_wins > y_wins) {
         $(".flip_buttons").css('display', 'none');
         $(".board_buttons").css('display', 'none');
-        alert('Red wins!');
-        // reset();    
+        return 1;
       } else if  (r_wins < y_wins) {
         $(".flip_buttons").css('display', 'none');
         $(".board_buttons").css('display', 'none');     
-        alert('Yellow wins!');
-        // reset();    
+        return -1;
       } else {
         $(".flip_buttons").css('display', 'none');
         $(".board_buttons").css('display', 'none');     
-        alert('Tie!');
+        return 0;
+      }
+    }
+    return null;
+  }
+
+  function alert_on_win(winner) {
+    if (winner != null) {
+      if (winner === 1) {
+        alert('Red wins!');
+      } else if (winner === -1) {
+        alert('Yellow wins!');
+      } else {
+        alert('Tie!')
       }
     }
   }
@@ -310,6 +321,9 @@ $(function() {
     $(space).addClass('win_square');            
   }
 
+  function delayAlert(message) {
+    alert(message);
+  }
   // function declare_winner(winner) {
   //   winner_declaration = winner + " wins!"
   //   if (confirm("Play again?") == true) {
@@ -326,7 +340,11 @@ $(function() {
     draw_board();
     swap_player();
     // TODO: CHECK FOR WIN
-    check_for_win(); 
+    var winner = check_for_win(); 
+    if (winner != null) {
+      draw_board();
+      alert_on_win(winner);
+    }
   }
 
   // Draw board
@@ -347,7 +365,6 @@ $(function() {
         } else {
           // Removes colors that are no longer spaces
           $(space).css('background-color', 'lightgrey');
-
           $(space).removeClass('win_square');
         }
       }
