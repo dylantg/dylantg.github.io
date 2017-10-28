@@ -11,6 +11,8 @@ $(function() {
   $('#flip_right').click(flip_right);
   $('#flip_over').click(flip_over);
 
+  $('#reset').click(reset);
+
   // Listen to column buttons
   $('#plus_0').click(add_to_col_0);
   $('#plus_1').click(add_to_col_1);
@@ -159,10 +161,17 @@ $(function() {
               break; // Short-circuits check if empty space
             }
           }
-          if (sum === win) {
-            r_win++;
-          } else if (sum === (-1 * win)) {
-            y_win++;
+          if (Math.abs(sum) === win) {
+            for (k = 0; k < win; k++) {
+              space = "#sq_" + i + "_" +  (j + k);
+              // $(space).css('border', '3px solid blue');
+              $(space).addClass('win_square');
+            }
+            if (sum === win) {
+              r_win++;
+            } else if (sum === (-1 * win)) {
+              y_win++;
+            }
           }
         }
       }
@@ -189,10 +198,17 @@ $(function() {
             }
           }
         }
-        if (sum === win) {
-          r_win++;
-        } else if (sum === (-1 * win)) {
-          y_win++;
+        if (Math.abs(sum) === win) {
+          for (k = 0; k < win; k++) {
+            space = "#sq_" + (i + k) + "_" +  j;
+            // $(space).css('border', '3px solid blue');
+            $(space).addClass('win_square');
+          }
+          if (sum === win) {
+            r_win++;
+          } else if (sum === (-1 * win)) {
+            y_win++;
+          }
         }
       }
     }
@@ -214,10 +230,17 @@ $(function() {
             break; // Short-circuits check if empty space
           }            
         }
-        if (sum === win) {
-          r_win++;
-        } else if (sum === (-1 * win)) {
-          y_win++;
+        if (Math.abs(sum) === win) {
+          for (k = 0; k < win; k++) {
+            space = "#sq_" + (i + k) + "_" +  (j + k);
+            // $(space).css('border', '3px solid blue');
+            $(space).addClass('win_square');            
+          }
+          if (sum === win) {
+            r_win++;
+          } else if (sum === (-1 * win)) {
+            y_win++;
+          }
         }
       }
     }
@@ -239,10 +262,17 @@ $(function() {
             break;
           }            
         }
-        if (sum === win) {
-          r_win++;
-        } else if (sum === (-1 * win)) {
-          y_win++;
+        if (Math.abs(sum) === win) {
+          for (k = 0; k < win; k++) {
+            space = "#sq_" + (i + k) + "_" +  (j - k);
+            // $(space).css('border', '3px solid blue');
+            $(space).addClass('win_square');            
+          }
+          if (sum === win) {
+            r_win++;
+          } else if (sum === (-1 * win)) {
+            y_win++;
+          }
         }
       }
     }
@@ -257,11 +287,15 @@ $(function() {
     r_wins = row_win['r'] + col_win['r'] + diag_up_win['r'] + diag_dwn_win['r'];
     y_wins = row_win['y'] + col_win['y'] + diag_up_win['y'] + diag_dwn_win['y'];
     if (r_wins > y_wins) {
+      $(".flip_buttons").css('display', 'none');
+      $(".board_buttons").css('display', 'none');
       alert('Red wins!');
-      reset();    
+      // reset();    
     } else if  (r_wins < y_wins) {
+      $(".flip_buttons").css('display', 'none');
+      $(".board_buttons").css('display', 'none');     
       alert('Yellow wins!');
-      reset();    
+      // reset();    
     }
   }
 
@@ -302,6 +336,8 @@ $(function() {
         } else {
           // Removes colors that are no longer spaces
           $(space).css('background-color', 'lightgrey');
+
+          $(space).removeClass('win_square');
         }
       }
     }
@@ -326,12 +362,12 @@ $(function() {
   // Reset game
   function reset() {
     current_player = 1;
+    $(".flip_buttons").css('display', 'initial');
+    $(".board_buttons").css('display', 'initial');
     board = get_empty_board(size); 
     draw_board();
     draw_player_square();
   }
-
-  // Draw win (TODO)
 
 
   function get_empty_board(size){
