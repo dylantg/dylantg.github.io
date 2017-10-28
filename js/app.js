@@ -82,7 +82,6 @@ $(function() {
 // MOVES ////////////////////////////////////////////////////////
   // Add function: Adds play to column if available
   function plus(col, play) {
-    console.log("Plus: " + col + ":" + play);
     if (board[col].length < size) {
       board[col].push(play);
       end_turn();
@@ -91,7 +90,6 @@ $(function() {
 
   // Minus function: Removes bottom piece from column
   function minus(row) {
-    console.log("Minus: " + row);
     if (board[row].length > 0) {
       board[row].shift();
       end_turn();      
@@ -243,7 +241,6 @@ $(function() {
     y_win = 0;
     for (i = 0; i <= size - win; i++) {
       for (j = win - 1; j < size; j++) {
-        console.log("Diag Down checking: ", i, j);
         sum = 0;
         for (k = 0; k < win; k++) {
           space = board[i + k][j - k];
