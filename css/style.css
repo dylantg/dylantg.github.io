@@ -66,7 +66,7 @@ footer {
   float: left;
 }
 
-.board_buttons {
+#board_buttons {
   height: 102px;
   width: 452px;
   float: left;
@@ -115,6 +115,10 @@ footer {
 
 .win_square {
   border: 3px solid blue;
+}
+
+#winner {
+  font-size: 24px;
 }
 /*
 @media (min-width: 768px) {
