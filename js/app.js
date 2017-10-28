@@ -286,16 +286,22 @@ $(function() {
     diag_dwn_win = check_diagonal_down(); //TODO
     r_wins = row_win['r'] + col_win['r'] + diag_up_win['r'] + diag_dwn_win['r'];
     y_wins = row_win['y'] + col_win['y'] + diag_up_win['y'] + diag_dwn_win['y'];
-    if (r_wins > y_wins) {
-      $(".flip_buttons").css('display', 'none');
-      $(".board_buttons").css('display', 'none');
-      alert('Red wins!');
-      // reset();    
-    } else if  (r_wins < y_wins) {
-      $(".flip_buttons").css('display', 'none');
-      $(".board_buttons").css('display', 'none');     
-      alert('Yellow wins!');
-      // reset();    
+    if (r_wins > 0 || y_wins > 0) {
+      if (r_wins > y_wins) {
+        $(".flip_buttons").css('display', 'none');
+        $(".board_buttons").css('display', 'none');
+        alert('Red wins!');
+        // reset();    
+      } else if  (r_wins < y_wins) {
+        $(".flip_buttons").css('display', 'none');
+        $(".board_buttons").css('display', 'none');     
+        alert('Yellow wins!');
+        // reset();    
+      } else {
+        $(".flip_buttons").css('display', 'none');
+        $(".board_buttons").css('display', 'none');     
+        alert('Tie!');
+      }
     }
   }
 
