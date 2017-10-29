@@ -153,7 +153,7 @@ footer {
 
 /*  MEDIA QUERIES */
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
 
   .board_with_buttons {
     width: 304px;
