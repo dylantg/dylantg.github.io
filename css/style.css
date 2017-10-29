@@ -156,8 +156,16 @@ footer {
 @media only screen and (max-width: 400px) {
 
   .container {
-    width: 400px;
+    width: 375px;
     background: pink;
+  }
+
+  header {
+    text-align: center
+  }
+
+  nav {
+    margin: 10px;
   }
 
   .board_with_buttons {
@@ -195,7 +203,7 @@ footer {
 
   /**/
   aside {
-    margin: 10px;
+    margin: 5px;
     width: 50px;
   }
 
@@ -208,13 +216,16 @@ footer {
     height: 50px;
     width: 50px;
     font-size: 16px;
+    padding-top: 10px;
   }
 
   #player_square {
     width: 50px;
     height: 50px;
   }
-
+  #player {
+    font-size: 16px;
+  }
 }
 
 /*
