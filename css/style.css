@@ -17,22 +17,26 @@ body {
 /* HEADER */
 
 header {
-  text-align: center;
   font-family: 'Oswald', sans-serif;
+  padding-left: 30px;
+}
+
+header h1 {
+  font-size: 35px;
 }
 
 nav a {
   color: white;
   text-decoration: initial;
+  padding-bottom: 10px;
 }
 
 /* ASIDE */
 
 aside {
   float: left;
-  /*border: 1px solid black;*/
-  margin: 10px;
-  width: 112px;
+  margin: 10px 30px;
+  width: 100px;
 }
 
 #flip_buttons {
@@ -78,9 +82,7 @@ aside {
 
 article {
   float: left;
-  border: 1px solid black;
 }
-
 
 .board_with_buttons {
   width: 454px;
@@ -110,7 +112,6 @@ article {
 
 .board_button {
   height: 50px;
-  /*width: 100px;*/
   width: 75px;
   font-size: 20px;
   border: 1px solid black;
@@ -124,8 +125,6 @@ article {
 }
 
 .square {
-/*  width: 100px;
-  height: 100px;*/
   width: 75px;
   height: 75px;
   background: lightgrey;
@@ -141,16 +140,78 @@ footer {
   padding: 20px;
 }
 
+/* RULES */
 
-/*
-.red {
-  background-color: red;
+.rules {
+  font-size: 20px;
+  padding: 20px;
+} 
+
+.move {
+  text-decoration: underline;
 }
 
-.blue {
-  background-color: blue;
+/*  MEDIA QUERIES */
+
+@media (max-width: 768px) {
+
+  .board_with_buttons {
+    width: 304px;
+  }
+
+  .board {
+    width: 302px;
+    height: 302px;
+    margin: 0 auto;
+    overflow: auto;
+    border: 1px solid black;
+    float: left;
+  }
+
+  #board_buttons {
+    height: 102px;
+    width: 302px;
+    float: left;
+    padding: 0px; 
+    margin: 0px; 
+    border: 1px solid black;
+  }
+
+  .board_button {
+    height: 50px;
+    width: 50px;
+    font-size: 20px;
+  }
+  
+  .square {
+    width: 50px;
+    height: 50px;
+  }
+
+  /**/
+  aside {
+    margin: 10px 20px;
+    width: 100px;
+  }
+
+  #flip_buttons {
+    width: 100px;
+    float: left;
+  }
+
+  .button {
+    height: 50px;
+    width: 100px;
+    font-size: 16px;
+  }
+
+  #player_square {
+    width: 100px;
+    height: 50px;
+  }
+
 }
-*/
+
 /*
 @media (min-width: 768px) {
   .container {
