@@ -3,7 +3,7 @@ $(function() {
   var size = 6;
   var win = 4;
   var current_player = 1;
-  // Red is +1, Yellow is -1
+  // Red is +1, Blue is -1
   var board = get_empty_board(size); 
 
   // Listen on button clicks
@@ -76,8 +76,6 @@ $(function() {
     minus(5);
   }
 
-  // Listen on column clicks (if neccessary)
-
 
 // MOVES ////////////////////////////////////////////////////////
   // Add function: Adds play to column if available
@@ -143,7 +141,7 @@ $(function() {
   // Check for win
   function check_columns() {
     r_win = 0;
-    y_win = 0;
+    b_win = 0;
     for (i = 0; i < size; i++) {
       col_size = board[i].length;
       // Only continues if column if large enough to have a win
@@ -165,18 +163,18 @@ $(function() {
             if (sum === win) {
               r_win++;
             } else if (sum === (-1 * win)) {
-              y_win++;
+              b_win++;
             }
           }
         }
       }
     }
-    return  {'r':r_win, 'y':y_win}
+    return  {'r':r_win, 'b':b_win}
   }
 
   function check_rows() {
     r_win = 0;
-    y_win = 0;
+    b_win = 0;
     // Checks columns to the farthest right a win can start
     for (i = 0; i <= size - win; i++) {
       // Checks only to the height of the column, since it can't start with a played space
@@ -199,17 +197,17 @@ $(function() {
           if (sum === win) {
             r_win++;
           } else if (sum === (-1 * win)) {
-            y_win++;
+            b_win++;
           }
         }
       }
     }
-    return  {'r':r_win, 'y':y_win};
+    return  {'r':r_win, 'b':b_win};
   }
 
   function check_diagonal_up() {
     r_win = 0;
-    y_win = 0;
+    b_win = 0;
     for (i = 0; i <= size - win; i++) {
       for (j = 0; j <= size - win; j++) {
         sum = 0;
@@ -228,17 +226,17 @@ $(function() {
           if (sum === win) {
             r_win++;
           } else if (sum === (-1 * win)) {
-            y_win++;
+            b_win++;
           }
         }
       }
     }
-    return  {'r':r_win, 'y':y_win};
+    return  {'r':r_win, 'b':b_win};
   }
 
   function check_diagonal_down() {
     r_win = 0;
-    y_win = 0;
+    b_win = 0;
     for (i = 0; i <= size - win; i++) {
       for (j = win - 1; j < size; j++) {
         sum = 0;
@@ -257,12 +255,12 @@ $(function() {
           if (sum === win) {
             r_win++;
           } else if (sum === (-1 * win)) {
-            y_win++;
+            b_win++;
           }
         }
       }
     }
-    return  {'r':r_win, 'y':y_win};
+    return  {'r':r_win, 'b':b_win};
   }
 
   function check_for_win() {
@@ -271,12 +269,12 @@ $(function() {
     diag_up_win = check_diagonal_up();
     diag_dwn_win = check_diagonal_down();
     r_wins = row_win['r'] + col_win['r'] + diag_up_win['r'] + diag_dwn_win['r'];
-    y_wins = row_win['y'] + col_win['y'] + diag_up_win['y'] + diag_dwn_win['y'];
-    if (r_wins > 0 || y_wins > 0) {
+    b_wins = row_win['b'] + col_win['b'] + diag_up_win['b'] + diag_dwn_win['b'];
+    if (r_wins > 0 || b_wins > 0) {
 
-      if (r_wins > y_wins) {
+      if (r_wins > b_wins) {
         return 1;
-      } else if  (r_wins < y_wins) {
+      } else if  (r_wins < b_wins) {
         return -1;
       } else {
         return 0;
@@ -294,7 +292,7 @@ $(function() {
       if (winner === 1) {
         $("#winner").text('Red wins!');        
       } else if (winner === -1) {
-        $("#winner").text('Yellow wins!');
+        $("#winner").text('Blue wins!');
       } else {
         $("#winner").text('Tie!');
       }
@@ -328,7 +326,7 @@ $(function() {
           if (value === 1) {
             $(space).css('background-color', 'red');
           } else if (value === -1) {
-            $(space).css('background-color', 'yellow');
+            $(space).css('background-color', 'blue');
           }          
         } else {
           // Removes colors that are no longer spaces
@@ -344,7 +342,7 @@ $(function() {
     if (current_player === 1){
       $("#player_square").css('background-color', 'red');
     } else {
-      $("#player_square").css('background-color', 'yellow');
+      $("#player_square").css('background-color', 'blue');
     }
   }
 
