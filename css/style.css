@@ -153,9 +153,10 @@ footer {
 
 /*  MEDIA QUERIES */
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 400px) {
 
   .container {
+    width: 400px;
     background: pink;
   }
 
@@ -194,23 +195,23 @@ footer {
 
   /**/
   aside {
-    margin: 10px 20px;
-    width: 100px;
+    margin: 10px;
+    width: 50px;
   }
 
   #flip_buttons {
-    width: 100px;
+    width: 50px;
     float: left;
   }
 
   .button {
     height: 50px;
-    width: 100px;
+    width: 50px;
     font-size: 16px;
   }
 
   #player_square {
-    width: 100px;
+    width: 50px;
     height: 50px;
   }
 
