@@ -155,6 +155,10 @@ footer {
 
 @media only screen and (max-width: 768px) {
 
+  .container {
+    background: pink;
+  }
+
   .board_with_buttons {
     width: 304px;
   }
