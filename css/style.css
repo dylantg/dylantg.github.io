@@ -74,9 +74,6 @@ aside {
   background-color: red;
 }
 
-.win_square {
-  border: 3px solid blue;
-}
 
 #winner {
   font-size: 24px;
@@ -135,6 +132,10 @@ article {
   background: lightgrey;
   border: 1px solid black;
   float: left;
+}
+
+.win_square {
+  border: 5px solid lawngreen;
 }
 
 /* FOOTER */
