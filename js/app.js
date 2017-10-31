@@ -28,6 +28,15 @@ $(function() {
   $('#minus_4').click(subtract_from_col_4);
   $('#minus_5').click(subtract_from_col_5);
 
+  // Add when click on column
+  $('.col0').click(add_to_col_0);
+  $('.col1').click(add_to_col_1);
+  $('.col2').click(add_to_col_2);
+  $('.col3').click(add_to_col_3);
+  $('.col4').click(add_to_col_4);
+  $('.col5').click(add_to_col_5);
+
+  // Click functions
   function add_to_col_0() {
     plus(0, current_player);
   }
@@ -158,6 +167,7 @@ $(function() {
           }
           if (Math.abs(sum) === win) {
             for (k = 0; k < win; k++) {
+              console.log("add win sq", i, (j + k));
               addWinSquare(i, (j + k));
             }
             if (sum === win) {
@@ -250,6 +260,7 @@ $(function() {
         }
         if (Math.abs(sum) === win) {
           for (k = 0; k < win; k++) {
+            console.log("add win sq", (i + k), (j - k));
             addWinSquare((i + k), (j - k));
           }
           if (sum === win) {
@@ -363,7 +374,6 @@ $(function() {
     draw_board();
     draw_player_square();
   }
-
 
   function get_empty_board(size){
     var temp = [];
