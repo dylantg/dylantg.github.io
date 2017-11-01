@@ -14,7 +14,8 @@ $(function() {
   $('#reset').click(reset);
 
   // Listen to column buttons
-  $('#plus_0').click(add_to_col_0);
+  // $('#plus_0').click(add_to_col_0);
+  $('#plus_0').click(function(){ plus(0, current_player) });
   $('#plus_1').click(add_to_col_1);
   $('#plus_2').click(add_to_col_2);
   $('#plus_3').click(add_to_col_3);
@@ -35,6 +36,8 @@ $(function() {
   $('.col3').click(add_to_col_3);
   $('.col4').click(add_to_col_4);
   $('.col5').click(add_to_col_5);
+
+  $('#overlay').click(overlay_off);
 
   // Click functions
   function add_to_col_0() {
@@ -302,9 +305,13 @@ $(function() {
       $("#player").css('display', 'none');
 
       if (winner === 1) {
-        $("#winner").text('Red wins!');        
+        $("#winner").text('Red wins!');
+        $("#overlay_text").text('Red wins!');
+        overlay_on();
       } else if (winner === -1) {
         $("#winner").text('Blue wins!');
+        $("#overlay_text").text('Blue wins!');
+        overlay_on();
       } else {
         $("#winner").text('Tie!');
       }
@@ -383,6 +390,15 @@ $(function() {
     }
     return temp;
   }
+
+  function overlay_on() {
+    $("#overlay").css("display", "block");
+  }
+
+  function overlay_off() {
+    $("#overlay").css("display", "none");
+  }
+
   //
   // function animateAdd(col, player) {
   //   var player_color = 'red';
