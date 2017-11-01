@@ -38,6 +38,7 @@ $(function() {
 
   // Click functions
   function add_to_col_0() {
+    // animateAdd(0, current_player);
     plus(0, current_player);
   }
 
@@ -382,5 +383,37 @@ $(function() {
     }
     return temp;
   }
+  //
+  // function animateAdd(col, player) {
+  //   var player_color = 'red';
+  //   if (player === -1) {
+  //     player_color = 'blue';
+  //   }
+  //   var height = board[col].length;
+  //   var id = setInterval(frame, 1000);
+  //   var actual_space = "#sq_" + col + "_" +  height;
+  //   console.log("Actual: ", actual_space);
+  //   var last_space = null;
+  //   var i = col;
+  //   var j = size - 1;
+  //   function frame() {
+  //     if (height > j) {
+  //       $(actual_space).css('background-color', player_color);
+  //       clearInterval(id);
+  //     } else {
+  //       space = "#sq_" + i + "_" +  j;
+  //       console.log("drawing", i, j);
+  //       $(space).css('background-color', player_color);
+  //       if (space != actual_space) {
+  //         $(actual_space).css('background-color', 'lightgrey');
+  //       }    
+  //       if (last_space != null) {
+  //         $(last_space).css('background-color', 'lightgrey');
+  //       }
+  //       last_space = space;
+  //       j--;
+  //     }
+  //   }
+  // }
 
 });
